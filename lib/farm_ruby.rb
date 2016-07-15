@@ -1,5 +1,5 @@
 require "farm_ruby/version"
-require "f"
+require "farm_ruby/f"
 
 module FarmRuby
   # Your code goes here...
