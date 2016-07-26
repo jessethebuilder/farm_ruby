@@ -15,6 +15,10 @@ class F
     F.new(path).append(content)
   end
 
+  def F.prepend(path, content)
+    F.new(path).prepend(content)
+  end
+
   def F.delete(path)
     F.new(path).delete
   end
@@ -28,7 +32,7 @@ class F
     f.dir
   end
 
-  def F.log_error(error, path = "error_log.log", note: nil, skip_backtrace: false)
+  def F.log_error(error, path = "log/error.log", note: nil, skip_backtrace: false, no_puts: false)
     s = ''
     s += note if note
     s += "\n" if note
@@ -37,7 +41,10 @@ class F
     s += error.message
     s += error.backtrace.join("\n") unless skip_backtrace
     s += "\n"
-    F.write(path, s)
+
+  #  puts "ERROR LOGGED: #{error.inspect}" unless no_puts
+
+    F.prepend(path, s)
   end
 
   def F.combine_files(dir, file_suffix = "*")
